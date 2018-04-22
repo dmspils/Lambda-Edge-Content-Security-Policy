@@ -36,7 +36,7 @@
 https://fonts.gstatic.com; img-src \'self\' data: https://www.google-analytics.com; style-src \'self\' 
 \'unsafe-inline\' https://fonts.googleapis.com https://fonts.gstatic.com; object-src \'none\'; report-uri 
 https://spilsbury.report-uri.io/r/default/csp/enforce; block-all-mixed-content; reflected-xss block; 
-frame-ancestors \'none\'; require-sri-for script; base-uri https://daniel.spilsbury.io',
+frame-ancestors \'none\'; require-sri-for script; base-uri https://daniel.spilsbury.io; upgrade-insecure-requests',
     }];
     callback(null, response);
 };
