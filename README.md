@@ -23,3 +23,6 @@ Config:
 10. Paste in the ARN from Lambda and select Origin-Response.
 11. Hit save and wait for the distribution to redeploy.
 12. Goto Mozilla Observatory [https://observatory.mozilla.org/] and test your policy.
+
+
+Test site via Cloudfront (whilst waiting for pesky HPKP to invalidate): https://d2jy424jiv3w24.cloudfront.net
