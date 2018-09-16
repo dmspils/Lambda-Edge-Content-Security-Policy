@@ -35,18 +35,7 @@ exports.handler = (event, context, callback) => {
     }];
     response.headers['Content-Security-Policy-Report-Only'] = [{
         key: 'Content-Security-Policy-Report-Only',
-        value: `'default-src \'self\';
-                script-src \'self\';
-                font-src \'self\' https://fonts.googleapis.com https://fonts.gstatic.com;
-                img-src \'self\' data: https://www.google-analytics.com;
-                style-src \'self\' https://fonts.googleapis.com https://fonts.gstatic.com;
-                object-src \'none\';
-                report-uri https://spilsbury.report-uri.io/r/default/csp/reportOnly;
-                block-all-mixed-content;
-                frame-ancestors \'none\';
-                require-sri-for script;
-                base-uri https://daniel.spilsbury.io;
-                upgrade-insecure-requests',`
+        value: 'default-src \'self\' ; script-src \'self\' https://ajax.googleapis.com/; style-src \'self\' ; img-src \'self\' ; font-src \'self\' ; upgrade-insecure-requests; block-all-mixed-content; reflected-xss block; base-uri https://daniel.spilsbury.io; referrer no-referrer; report-uri https://spilsbury.report-uri.io/r/default/csp/reportOnly',
     }];
     callback(null, response);
 
