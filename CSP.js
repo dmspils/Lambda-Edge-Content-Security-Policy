@@ -35,7 +35,7 @@ exports.handler = (event, context, callback) => {
     }];
     response.headers['Content-Security-Policy-Report-Only'] = [{
         key: 'Content-Security-Policy-Report-Only',
-        value: 'default-src \'self\' ; script-src \'self\' https://ajax.googleapis.com/; style-src \'self\' ; img-src \'self\' ; font-src \'self\' https://fonts.gstatic.com; upgrade-insecure-requests; block-all-mixed-content; reflected-xss block; base-uri https://daniel.spilsbury.io; referrer no-referrer; report-uri https://spilsbury.report-uri.io/r/default/csp/reportOnly',
+        value: 'default-src \'self\' ; script-src \'self\' https://ajax.googleapis.com/; style-src \'self\' https://fonts.googleapis.com; img-src \'self\' ; font-src \'self\' https://fonts.gstatic.com; upgrade-insecure-requests; block-all-mixed-content; reflected-xss block; base-uri https://daniel.spilsbury.io; referrer no-referrer; report-uri https://spilsbury.report-uri.io/r/default/csp/reportOnly',
     }];
     callback(null, response);
 
