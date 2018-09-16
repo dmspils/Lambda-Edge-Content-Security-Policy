@@ -11,7 +11,7 @@ exports.handler = (event, context, callback) => {
     }];
     response.headers['X-XSS-Protection'] = [{
         key: 'X-XSS-Protection',
-        value: '1; mode=block',
+        value: '1; mode=block; report=https://spilsbury.report-uri.com/r/d/xss/reportOnly',
     }];
     response.headers['X-Content-Type-Options'] = [{
         key: 'X-Content-Type-Options',
