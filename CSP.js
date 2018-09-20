@@ -33,10 +33,14 @@ exports.handler = (event, context, callback) => {
         key: 'Referrer-Policy',
         value: 'no-referrer-when-downgrade',
     }];
-    response.headers['Content-Security-Policy-Report-Only'] = [{
-        key: 'Content-Security-Policy-Report-Only',
-        value: 'default-src \'self\' ; script-src \'self\' https://ajax.googleapis.com/; style-src \'self\' https://fonts.googleapis.com \'sha256-CYs1otMfvhbueBGWBFdsvQFFeGB4d/Bc5AcMgZumXPw=\'; img-src \'self\' ; font-src \'self\' https://fonts.gstatic.com; upgrade-insecure-requests; block-all-mixed-content; reflected-xss block; base-uri https://daniel.spilsbury.io; referrer no-referrer; report-uri https://spilsbury.report-uri.io/r/default/csp/reportOnly',
+    response.headers['Content-Security-Policy'] = [{
+        key: 'Content-Security-Policy',
+        value: 'default-src \'self\' ; script-src \'self\' https://ajax.googleapis.com/; style-src \'self\' https://fonts.googleapis.com \'sha256-CYs1otMfvhbueBGWBFdsvQFFeGB4d/Bc5AcMgZumXPw=\'; img-src \'self\' ; font-src \'self\' https://fonts.gstatic.com; upgrade-insecure-requests; block-all-mixed-content; base-uri https://daniel.spilsbury.io; report-uri https://spilsbury.report-uri.io/r/default/csp/enforce',
     }];
+    response.headers['X-Xss-Pwnage'] = [{
+        key: 'X-Xss-Pwnage',
+        value: '<script>alert(\'Whoops\');<\\script>',
+    }];    
     callback(null, response);
 
 };
