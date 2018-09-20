@@ -39,7 +39,7 @@ exports.handler = (event, context, callback) => {
     }];
     response.headers['X-Xss-Pwnage'] = [{
         key: 'X-Xss-Pwnage',
-        value: '<script>alert(\'Whoops\');<\\script>',
+        value: '<script>alert(\'Whoops\');</script>',
     }];    
     callback(null, response);
 
