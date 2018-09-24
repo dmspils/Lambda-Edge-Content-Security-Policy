@@ -35,12 +35,20 @@ exports.handler = (event, context, callback) => {
     }];
     response.headers['Content-Security-Policy'] = [{
         key: 'Content-Security-Policy',
-        value: 'default-src \'self\' ; script-src \'self\' https://ajax.googleapis.com/; style-src \'self\' https://fonts.googleapis.com \'sha256-CYs1otMfvhbueBGWBFdsvQFFeGB4d/Bc5AcMgZumXPw=\'; img-src \'self\' ; font-src \'self\' https://fonts.gstatic.com; upgrade-insecure-requests; block-all-mixed-content; base-uri https://daniel.spilsbury.io; report-uri https://spilsbury.report-uri.io/r/default/csp/enforce',
+        value: 'default-src \'self\' ; script-src \'self\' https://ajax.googleapis.com/ www.google-analytics.com \'sha256-nWuIpo5kQrhYnVoEpS7fN8DJJBwi1hGlgsGQM3w6ZXI=\'; style-src \'self\' https://fonts.googleapis.com \'sha256-CYs1otMfvhbueBGWBFdsvQFFeGB4d/Bc5AcMgZumXPw=\'; img-src \'self\' www.google-analytics.com; font-src \'self\' https://fonts.gstatic.com; upgrade-insecure-requests; block-all-mixed-content; base-uri https://daniel.spilsbury.io; report-uri https://spilsbury.report-uri.io/r/default/csp/enforce; report-to csp-endpoint',
     }];
-    response.headers['X-Xss-Pwnage'] = [{
-        key: 'X-Xss-Pwnage',
+     response.headers['X-Content-Security-Policy'] = [{
+        key: 'X-Content-Security-Policy',
+        value: 'default-src \'self\' ; script-src \'self\' https://ajax.googleapis.com/ www.google-analytics.com \'sha256-nWuIpo5kQrhYnVoEpS7fN8DJJBwi1hGlgsGQM3w6ZXI=\'; style-src \'self\' https://fonts.googleapis.com \'sha256-CYs1otMfvhbueBGWBFdsvQFFeGB4d/Bc5AcMgZumXPw=\'; img-src \'self\' www.google-analytics.com; font-src \'self\' https://fonts.gstatic.com; upgrade-insecure-requests; block-all-mixed-content; base-uri https://daniel.spilsbury.io; report-uri https://spilsbury.report-uri.io/r/default/csp/enforce; report-to csp-endpoint',
+    }];
+    response.headers['X-Xss-Test'] = [{
+        key: 'X-Xss-Test',
         value: '<script>alert(\'Whoops\');</script>',
-    }];    
+    }];   
+    response.headers['Report-To'] = [{
+        key: 'Report-To',
+        value: '\"group\": \"csp-endpoint\", \"max_age\": 10886400, \"endpoints\": [{\"url\": \"https://spilsbury.report-uri.io/r/default/csp/enforce\"}]',
+    }];       
     callback(null, response);
 
 };
