@@ -35,11 +35,12 @@ exports.handler = (event, context, callback) => {
     }];
     response.headers['Content-Security-Policy'] = [{
         key: 'Content-Security-Policy',
-        value: 'default-src \'self\' ; script-src \'self\' https://ajax.googleapis.com/ www.google-analytics.com \'sha256-nWuIpo5kQrhYnVoEpS7fN8DJJBwi1hGlgsGQM3w6ZXI=\'; style-src \'self\' https://fonts.googleapis.com \'sha256-CYs1otMfvhbueBGWBFdsvQFFeGB4d/Bc5AcMgZumXPw=\'; img-src \'self\' www.google-analytics.com; font-src \'self\' https://fonts.gstatic.com; upgrade-insecure-requests; block-all-mixed-content; base-uri https://daniel.spilsbury.io; report-uri https://spilsbury.report-uri.io/r/default/csp/enforce; report-to csp-endpoint',
-    }];
-     response.headers['X-Content-Security-Policy'] = [{
-        key: 'X-Content-Security-Policy',
-        value: 'default-src \'self\' ; script-src \'self\' https://ajax.googleapis.com/ www.google-analytics.com \'sha256-nWuIpo5kQrhYnVoEpS7fN8DJJBwi1hGlgsGQM3w6ZXI=\'; style-src \'self\' https://fonts.googleapis.com \'sha256-CYs1otMfvhbueBGWBFdsvQFFeGB4d/Bc5AcMgZumXPw=\'; img-src \'self\' www.google-analytics.com; font-src \'self\' https://fonts.gstatic.com; upgrade-insecure-requests; block-all-mixed-content; base-uri https://daniel.spilsbury.io; report-uri https://spilsbury.report-uri.io/r/default/csp/enforce; report-to csp-endpoint',
+        value: 'default-src \'self\'; script-src \'self\' https://ajax.googleapis.com/; style-src \'self\' https://fonts.googleapis.com \'unsafe-inline\'; img-src \'self\'; object-src \'none\'; font-src \'self\' https://fonts.gstatic.com; frame-ancestors \'none\'; block-all-mixed-content; base-uri https://daniel.spilsbury.io; upgrade-insecure-requests; report-uri https://europe-west1-bbc-otg-traf-mgr-bq-prod-4591.cloudfunctions.net/report-endpoint',
+    }]; 
+    response.headers['Content-Security-Policy-Report-Only'] = [{
+        key: 'Content-Security-Policy-Report-Only',
+        value: 'default-src \'self\'; script-src \'self\' https://ajax.googleapis.com/; style-src \'self\' https://fonts.googleapis.com \'unsafe-inline\'; img-src \'self\'; object-src \'none\'; font-src \'self\' https://fonts.gstatic.com; block-all-mixed-content; base-uri https://daniel.spilsbury.io; report-to csp-endpoint',
+ 
     }];
     response.headers['X-Xss-Test'] = [{
         key: 'X-Xss-Test',
@@ -47,8 +48,12 @@ exports.handler = (event, context, callback) => {
     }];   
     response.headers['Report-To'] = [{
         key: 'Report-To',
-        value: '\"group\": \"csp-endpoint\", \"max_age\": 10886400, \"endpoints\": [{\"url\": \"https://spilsbury.report-uri.io/r/default/csp/enforce\"}]',
-    }];       
+        value: '{\"group\": \"csp-endpoint\", \"max_age\": 3600, \"endpoints\": [{\"url\": \"https://spilsbury.report-uri.com/a/d/g"}], \"include_subdomains\": true}',
+    }];
+    response.headers['NEL'] = [{
+        key: 'NEL',
+        value: '{\"group\": \"csp-endpoint\", \"max_age\": 3600, \"include_subdomains\": true}',
+    }];      
     callback(null, response);
 
 };
