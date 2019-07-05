@@ -33,26 +33,28 @@ exports.handler = (event, context, callback) => {
         key: 'Referrer-Policy',
         value: 'no-referrer-when-downgrade',
     }];
+    // This common header sends a report-uri report to both Scott and BBC
     response.headers['Content-Security-Policy'] = [{
         key: 'Content-Security-Policy',
-        value: 'default-src \'self\'; script-src \'self\' https://ajax.googleapis.com/; style-src \'self\' https://fonts.googleapis.com \'unsafe-inline\'; img-src \'self\'; object-src \'none\'; font-src \'self\' https://fonts.gstatic.com; frame-ancestors \'none\'; block-all-mixed-content; base-uri https://daniel.spilsbury.io; upgrade-insecure-requests; report-uri https://europe-west1-bbc-otg-traf-mgr-bq-prod-4591.cloudfunctions.net/report-endpoint; report-uri https://spilsbury.report-uri.com/r/d/csp/enforce',
+        value: 'default-src \'self\'; script-src \'self\' https://ajax.googleapis.com/; style-src \'self\' https://fonts.googleapis.com \'unsafe-inline\'; img-src \'self\'; object-src \'none\'; font-src \'self\' https://fonts.gstatic.com; frame-ancestors \'none\'; block-all-mixed-content; base-uri https://daniel.spilsbury.io; upgrade-insecure-requests; report-uri https://europe-west1-bbc-otg-traf-mgr-bq-prod-4591.cloudfunctions.net/report-endpoint https://spilsbury.report-uri.com/r/d/csp/enforce',
     }]; 
+    // This header sends a report-to report to Scott's service
     response.headers['Content-Security-Policy-Report-Only'] = [{
         key: 'Content-Security-Policy-Report-Only',
-        value: 'default-src \'self\'; script-src \'self\' https://ajax.googleapis.com/; style-src \'self\' https://fonts.googleapis.com \'unsafe-inline\'; img-src \'self\'; object-src \'none\'; font-src \'self\' https://fonts.gstatic.com; block-all-mixed-content; base-uri https://daniel.spilsbury.io; report-to scott; report-to bbc',
- 
-    }];
+        value: 'default-src \'self\'; script-src \'self\' https://ajax.googleapis.com/; style-src \'self\' https://fonts.googleapis.com \'unsafe-inline\'; img-src \'self\'; object-src \'none\'; font-src \'self\' https://fonts.gstatic.com; block-all-mixed-content; base-uri https://daniel.spilsbury.io; report-to scott',
+     }];
+    // This header sends a report-to report to the BBC service
+    response.headers['Content-Security-Policy-Report-Only'] = [{
+        key: 'Content-Security-Policy-Report-Only',
+        value: 'default-src \'self\'; script-src \'self\' https://ajax.googleapis.com/; style-src \'self\' https://fonts.googleapis.com \'unsafe-inline\'; img-src \'self\'; object-src \'none\'; font-src \'self\' https://fonts.gstatic.com; block-all-mixed-content; base-uri https://daniel.spilsbury.io; report-to bbc',
+     }];
     response.headers['X-Xss-Test'] = [{
         key: 'X-Xss-Test',
-        value: '<script>alert(\'Whoops\');</script>',
+        value: '<script>alert(\'xss\');</script>',
     }];   
     response.headers['Report-To'] = [{
         key: 'Report-To',
-        value: '{\"group\": \"scott\", \"max_age\": 3600, \"endpoints\": [{\"url\": \"https://spilsbury.report-uri.com/a/d/g"}], \"include_subdomains\": true}',
-    }];
-    response.headers['Report-To'] = [{
-        key: 'Report-To',
-        value: '{\"group\": \"bbc\", \"max_age\": 3600, \"endpoints\": [{\"url\": \"https://europe-west1-bbc-otg-traf-mgr-bq-prod-4591.cloudfunctions.net/report-endpoint"}], \"include_subdomains\": true}',
+        value: '{\"group\": \"scott\", \"max_age\": 3600, \"endpoints\": [{\"url\": \"https://spilsbury.report-uri.com/a/d/g"}], \"include_subdomains\": true}, {\"group\": \"bbc\", \"max_age\": 3600, \"endpoints\": [{\"url\": \"https://europe-west1-bbc-otg-traf-mgr-bq-prod-4591.cloudfunctions.net/report-endpoint"}], \"include_subdomains\": true}',
     }];
     response.headers['NEL'] = [{
         key: 'NEL',
