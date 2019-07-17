@@ -49,14 +49,32 @@ exports.handler = (event, context, callback) => {
         key: 'X-Xss-Test',
         value: '<script>alert(\'xss\');</script>',
     }];   
+
+// Old policy which works
+//    response.headers['Report-To'] = [{
+//        key: 'Report-To',
+//        value: '{\"group\": \"scott\", \"max_age\": 3600, \"endpoints\": [{\"url\": \"https://spilsbury.report-uri.com/a/d/g"}], \"include_subdomains\": true}, {\"group\": \"bbc\", \"max_age\": 3600, \"endpoints\": [{\"url\": \"https://europe-west1-bbc-otg-traf-mgr-bq-prod-4591.cloudfunctions.net/report-endpoint"}], \"include_subdomains\": true}',
+//    }];
+
+// Test policy
     response.headers['Report-To'] = [{
         key: 'Report-To',
-        value: '{\"group\": \"scott\", \"max_age\": 3600, \"endpoints\": [{\"url\": \"https://spilsbury.report-uri.com/a/d/g"}], \"include_subdomains\": true}, {\"group\": \"bbc\", \"max_age\": 3600, \"endpoints\": [{\"url\": \"https://europe-west1-bbc-otg-traf-mgr-bq-prod-4591.cloudfunctions.net/report-endpoint"}], \"include_subdomains\": true}',
+        value: '{\"group\": \"bbc\", \"max_age\": 3600, \"endpoints\": [{\"url\": \"https://europe-west1-bbc-otg-traf-mgr-bq-prod-4591.cloudfunctions.net/report-endpoint"}], \"include_subdomains\": true}, {\"group\": \"scott\", \"max_age\": 3600, \"endpoints\": [{\"url\": \"https://spilsbury.report-uri.com/a/d/g"}], \"include_subdomains\": true}',
     }];
+
+
+
     response.headers['NEL'] = [{
         key: 'NEL',
         value: '{\"group\": \"scott\", \"max_age\": 3600, \"include_subdomains\": true}',
+    }];  
+    
+    response.headers['Expect-CT'] = [{
+        key: 'Expect-CT',
+        value: 'max-age=0, report-uri="https://spilsbury.report-uri.com/r/d/ct/reportOnly"',
     }];      
+    
+    
     callback(null, response);
 
 };
